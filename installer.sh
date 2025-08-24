@@ -25,6 +25,23 @@ loading_bar() {
     echo
 }
 
+# === Kirim pesan Telegram ===
+send_telegram_message() {
+    local text="$1"
+    local url="https://api.telegram.org/bot${BOT_TOKEN}/sendMessage"
+    
+    if [ -n "$THREAD_ID" ]; then
+        curl -s -X POST "$url" \
+            -d "chat_id=${CHAT_ID}" \
+            -d "message_thread_id=${THREAD_ID}" \
+            -d "text=${text}" >/dev/null
+    else
+        curl -s -X POST "$url" \
+            -d "chat_id=${CHAT_ID}" \
+            -d "text=${text}" >/dev/null
+    fi
+}
+
 install_smsforward() {
     clear
     echo -e "${BLUE}=====================================${NC}"
@@ -83,6 +100,9 @@ EOF
     echo -e "${MAGENTA}Terima kasih sudah menggunakan SMS Forward Bot 🚀${NC}"
     echo
     read -p "$(echo -e ${YELLOW}Tekan Enter untuk kembali ke menu...${NC})"
+
+    # Kirim notifikasi Telegram
+    send_telegram_message "🚀 Instalasi selesai.\nCek log: logread -f ✅"
 }
 
 uninstall_smsforward() {
