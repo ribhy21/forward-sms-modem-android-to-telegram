@@ -1,5 +1,5 @@
 #!/bin/sh
-# forward-loop-sms.sh v2.3 — UCI config, robust body parser, HTML + urlencode
+# forward-loop-sms.sh v1.0 — UCI config, robust body parser, HTML + urlencode
 
 set -eu
 export LANG="C.UTF-8" || true
