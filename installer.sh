@@ -19,7 +19,7 @@ loading_bar() {
         filled=$((i/2))
         empty=$((50-filled))
         BAR="${GREEN}$(printf '#%.0s' $(seq 1 $filled))${RED}$(printf '.%.0s' $(seq 1 $empty))${NC}"
-        echo -ne "\r${YELLOW}[${BAR}] ${CYAN}${i}%%%${NC}"
+        echo -ne "\r${YELLOW}[${BAR}] ${CYAN}${i}%%${NC}"
         sleep 0.02
     done
     echo
@@ -127,7 +127,7 @@ uninstall_smsforward() {
         filled=$((i/2))
         empty=$((50-filled))
         BAR="${GREEN}$(printf '#%.0s' $(seq 1 $filled))${RED}$(printf '.%.0s' $(seq 1 $empty))${NC}"
-        echo -ne "\r${YELLOW}[${BAR}] ${CYAN}${i}%%%${NC}"
+        echo -ne "\r${YELLOW}[${BAR}] ${CYAN}${i}%%${NC}"
         sleep 0.02
     done
     echo
