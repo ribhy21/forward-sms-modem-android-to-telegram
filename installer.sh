@@ -107,17 +107,47 @@ EOF
 
 uninstall_smsforward() {
     clear
-    echo -e "${RED}[*] Menghapus smsforward...${NC}"
-    /etc/init.d/smsforward stop 2>/dev/null || true
-    /etc/init.d/smsforward disable 2>/dev/null || true
+    echo -e "${RED}[*] Menghapus SMS Forward Bot...${NC}"
 
+    # Stop service jika ada
+    if [ -f /etc/init.d/smsforward ]; then
+        /etc/init.d/smsforward stop 2>/dev/null || true
+        /etc/init.d/smsforward disable 2>/dev/null || true
+    fi
+
+    # Hapus file
     rm -f /etc/init.d/smsforward
     rm -f /etc/config/smsforward
     rm -f /usr/bin/forward-loop-sms.sh
 
-    echo -e "${GREEN}[+] smsforward sudah dihapus.${NC}"
+    # Loading bar saat uninstall
     echo
+    echo -e "${CYAN}[*] Membersihkan sisa file...${NC}"
+    for i in $(seq 0 100); do
+        filled=$((i/2))
+        empty=$((50-filled))
+        BAR="${GREEN}$(printf '#%.0s' $(seq 1 $filled))${RED}$(printf '.%.0s' $(seq 1 $empty))${NC}"
+        echo -ne "\r${YELLOW}[${BAR}] ${CYAN}${i}%%%${NC}"
+        sleep 0.02
+    done
+    echo
+
+    # Pesan akhir
+    clear
+    echo -e "${BLUE}=====================================${NC}"
+    echo -e "✅ ${GREEN}Semua file SMS Forward Bot telah dihapus.${NC}"
+    echo -e "${BLUE}=====================================${NC}"
     read -p "$(echo -e ${YELLOW}Tekan Enter untuk kembali ke menu...${NC})"
+
+    # Kembali ke menu utama
+    show_menu
+    read -r CHOICE
+    case "$CHOICE" in
+        1) install_smsforward ;;
+        2) uninstall_smsforward ;;
+        3) clear; exit 0 ;;
+        *) echo -e "${RED}Pilihan tidak valid.${NC}"; exit 1 ;;
+    esac
 }
 
 show_menu() {
