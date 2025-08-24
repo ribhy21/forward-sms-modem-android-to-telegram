@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # === Update dan pasang paket penting ===
-opkg update
-opkg install adb curl ca-bundle ca-certificates -y 2>/dev/null
+opkg update >/dev/null 2>&1
+opkg install adb curl ca-bundle ca-certificates -y >/dev/null 2>&1
 
 # 🎨 Warna ANSI
 RED='\033[1;31m'
