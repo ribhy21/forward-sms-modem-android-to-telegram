@@ -102,7 +102,7 @@ EOF
     read -p "$(echo -e ${YELLOW}Tekan Enter untuk kembali ke menu...${NC})"
 
     # Kirim notifikasi Telegram
-    send_telegram_message "🚀 Instalasi selesai.\nCek log: logread -f ✅"
+    send_telegram_message "🚀 Instalasi SMS Forward Bot selesai. Cek log: logread -f ✅"
 }
 
 uninstall_smsforward() {
