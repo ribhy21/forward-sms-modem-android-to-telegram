@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# === Update dan pasang paket penting ===
+opkg update
+opkg install adb curl ca-bundle ca-certificates -y 2>/dev/null
+
 # 🎨 Warna ANSI
 RED='\033[1;31m'
 GREEN='\033[1;32m'
@@ -10,6 +14,7 @@ CYAN='\033[1;36m'
 WHITE='\033[1;37m'
 NC='\033[0m' # Reset
 
+# URL repo
 REPO_URL="https://raw.githubusercontent.com/ribhy21/forward-sms-modem-android-to-telegram/main/sms%20forward"
 
 loading_bar() {
